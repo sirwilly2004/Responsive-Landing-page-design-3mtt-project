@@ -1,0 +1,398 @@
+/* Base styles and variables */
+:root {
+    --primary: #e63946;
+    --primary-dark: #c1121f;
+    --secondary: #457b9d;
+    --secondary-dark: #1d3557;
+    --background: #f1faee;
+    --text: #1d3557;
+    --accent: #a8dadc;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    color: var(--text);
+    background-color: var(--background);
+    line-height: 1.6;
+}
+
+/* Header and Navigation */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: var(--white);
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 100;
+}
+
+.logo img {
+    max-width: 200px;
+    height: auto;
+    max-height: 50px;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+}
+
+.navbar li {
+    margin-left: 1.5rem;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+
+.navbar a:hover {
+    background-color: var(--accent);
+    color: var(--secondary-dark);
+}
+
+/* Mobile Menu Toggle (CSS-only approach) */
+.menu-toggle {
+    display: none;
+}
+
+.menu-button {
+    display: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: var(--primary);
+    border-radius: 3px;
+    transition: var(--transition);
+}
+
+.menu-icon {
+    top: 13px;
+}
+
+.menu-icon::before {
+    content: '';
+    top: -8px;
+}
+
+.menu-icon::after {
+    content: '';
+    top: 8px;
+}
+
+/* Hero Section */
+.hero {
+    background-image: url('./images/home-page.png');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--white);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+}
+
+.hero-content {
+    max-width: 800px;
+    padding: 2.5rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: 10px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+    margin: 0 1rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: var(--white);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+    background-color: var(--secondary);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-dark);
+}
+
+/* Responsive Design for different screen sizes. */
+
+@media (max-width: 768px) {
+    /* Mobile Menu */
+    .menu-button {
+        display: block;
+    }
+    
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        box-shadow: var(--shadow);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .menu-toggle:checked ~ .navbar {
+        max-height: 300px;
+    }
+    
+    .navbar ul {
+        flex-direction: column;
+        padding: 0;
+    }
+    
+    .navbar li {
+        margin: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .navbar a {
+        display: block;
+        padding: 1rem 2rem;
+        border-radius: 0;
+    }
+    
+    /* Menu Icon Animation */
+    .menu-toggle:checked ~ .menu-button .menu-icon {
+        background-color: transparent;
+    }
+    
+    .menu-toggle:checked ~ .menu-button .menu-icon::before {
+        transform: rotate(45deg);
+        top: 0;
+    }
+    
+    .menu-toggle:checked ~ .menu-button .menu-icon::after {
+        transform: rotate(-45deg);
+        top: 0;
+    }
+    
+    /* Hero Section */
+    .hero-content {
+        padding: 1.5rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+    }
+    
+    .button-group {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+        margin-bottom: 0.5rem;
+        text-align: center;
+    }
+}
+
+/* Additional responsive adjustments */
+@media (max-width: 480px) {
+    header {
+        padding: 0.75rem 1rem;
+    }
+    
+    .logo img {
+        max-width: 150px;
+    }
+    
+    .hero {
+        height: 90vh;
+    }
+    
+    .hero-content {
+        padding: 1.25rem;
+    }
+    
+    .hero h1 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+}
+
+/* features section code */
+/* Features Section */
+.features {
+    padding: 30px;
+    background-color: var(--white);
+}
+
+/* Title Styling */
+.features h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bolder;
+    font-size: 40px;
+    color: var(--text);
+}
+
+/* Wrapper for Feature Cards */
+.feature-items {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Adds space between cards */
+    flex-wrap: wrap; /* Ensures responsiveness */
+}
+
+/* Single Feature Card */
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    width: 300px; /* Ensures uniform size */
+    border-radius: 10px;
+    background-color: var(--accent);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    text-align: center;
+}
+.feature-item h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+/* Hover Effect */
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Image inside Feature Card */
+.feature-icon {
+    width: 100px;
+    height: 100px;
+    font-size: 50px;
+    margin-bottom: 10px;
+}
+
+/* Footer Section */
+.footer {
+    background-color: var(--secondary-dark);
+    color: var(--white);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.footer-contact {
+    margin:20px;
+    font-size: 15px;
+}
+.footer-copy{
+    margin-right: 30px;
+}
+.footer a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (min-width: 600px) {
+    .footer-content {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}
